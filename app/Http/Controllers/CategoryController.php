@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-
+use Auth;
 class CategoryController extends Controller
 {
     /**
@@ -14,9 +14,19 @@ class CategoryController extends Controller
      */
     public function index()
     {
-          $categories = Category::all();
 
+        if(Auth::user()->hasPermisssionTo('crud categories')){
+
+
+          $categories = Category::all();
         return view('categories.index', compact('categories'));
+
+        }else
+        return redirect()->back()->with('error','NO fue posible crear el registro');
+    }
+
+
+
     }
 
     /**

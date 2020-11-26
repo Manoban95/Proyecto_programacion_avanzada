@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+Auth;
 
 class BookController extends Controller
 {
@@ -40,19 +41,25 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        if($book = Book::create($request->all())){
+
+       if(Auth::user()->hasPermissionTo('add books')){
+
+       if($book = Book::create($request->all())){
             if ($request->hasFile('cover')) {
                 $file = $request->file('cover');
                 $fileName = 'book_cover'.$book->id.'.'.$file->getClientOriginalExtension();
                 $path = $request->file('cover')->storeAs('img/books',$fileName);
             }
-            $book->cover = $fileName;
-            $book->save();
-            return redirect()->back();
-        }
+               $book->cover = $fileName;
+               $book->save();
+               return redirect()->back();
+            }
         return  redirect()->back();
-    }
+         } 
 
+       }
+
+       
     /**
      * Display the specified resource.
      *

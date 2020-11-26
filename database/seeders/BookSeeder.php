@@ -14,7 +14,7 @@ class BookSeeder extends Seeder
      */
     public function run()
     {
-        $books = json_decode(file_get_contents("database\jsons\books.json"), true);
+        $books = json_decode(file_get_contents("database\json\Book.json"), true);
         foreach ($books as $bk) {
 
             $book = new Book();
