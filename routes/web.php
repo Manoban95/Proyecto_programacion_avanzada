@@ -30,6 +30,11 @@ Route::post('/categories','CategoryController@store');
 Route::put('/categories', 'CategoryController@update');
 
 Route::delete('/categories/{category}','CategoryController@destroy');
+
+
+Route::get('/user','CategoryController@index');
+
+
     
  });
 

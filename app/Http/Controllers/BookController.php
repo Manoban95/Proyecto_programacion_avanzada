@@ -68,7 +68,9 @@ class BookController extends Controller
                 return redirect()->back();
             }
 
-       }
+         }
+
+      } 
 
        
     /**

@@ -1,3 +1,5 @@
+
+
 <x-app-layout>
     <x-slot name="header">
       <div class="row">
@@ -7,9 +9,19 @@
             </h2>
         </div>
         <div class="col-md-4 col-12">
-          <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addBookModal">
-            Add Book
-          </button>       
+           @if (Auth::user()->hasPermissionTo('add books')) 
+                   <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addBookModal">
+                    Add Book
+                  </button>       
+
+
+           @endif
+
+            
+
+
+
+          
         </div>
       </div>     
     </x-slot>
@@ -27,9 +39,13 @@
               <th scope="col">Title</th>
               <th scope="col">Description</th>
               <th scope="col">Category</th>
+              <th scope="col">Botones</th>
+
             </tr>
           </thead>
           <tbody>
+
+
             @if (isset($books) && count($books)>0)
             @foreach($books as $book)
             <tr>
@@ -45,6 +61,14 @@
               <td>
                 {{ $book->Category_id }}
               </td>
+              <td>
+                  <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addBookModal">
+                     Orueba 
+                  </button>  
+              </td>
+
+                
+
             </tr>
             
             @endforeach
