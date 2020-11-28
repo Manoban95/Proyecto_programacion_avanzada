@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
 
-        if(Auth::user()->hasPermisssionTo('crud categories')){
+        if(Auth::user()->hasPermissionTo('crud categories')){
 
 
           $categories = Category::all();
@@ -27,7 +27,7 @@ class CategoryController extends Controller
 
 
 
-    }
+    
 
     /**
      * Show the form for creating a new resource.
