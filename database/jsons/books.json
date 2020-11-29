@@ -1,0 +1,38 @@
+[
+	{
+		"title" : "Ojos de fuego",
+		"description" : "Una niña con ojos azules con poder de generar fuego",
+		"year" : "2013",
+		"pages" : 582,
+		"isbn" : "6070749006",
+		"editorial" : "DeBolsillo",
+		"edition" : "1",
+		"autor" : "Stephen King",
+		"cover" : "OjosDeFuego.png",
+		"category_id":1
+	},
+	{
+		"title" : "Libro 2",
+		"description" : "Descripción libro 2",
+		"year" : "2015",
+		"pages" : 342,
+		"isbn" : "6070749551",
+		"editorial" : "Editorial 2",
+		"edition" : "1",
+		"autor" : "Autor 2",
+		"cover" : "Libro2.png",
+		"category_id":2
+	},
+	{
+		"title" : "Libro 3",
+		"description" : "Descripción libro 3",
+		"year" : "2017",
+		"pages" : 900,
+		"isbn" : "6070749995",
+		"editorial" : "Editorial 3",
+		"edition" : "1",
+		"autor" : "Autor 3",
+		"cover" : "Libro3.png",
+		"category_id":3
+	}
+]

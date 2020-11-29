@@ -1,0 +1,34 @@
+[
+
+
+    {
+     
+     "title" : "La bailarina de auschwitz ",
+     "description" : " un libro sobrecogedor",
+     "year" : 2018,
+     "pages" : 416,
+     "isbn" : " 6121513799",
+     "editorial" : " PLANETA ",
+     "edition" : 1,
+     "autor" : " EDITH EGER",
+     "cover" : " Bailairina.png",
+     "category_id":1
+
+    },
+        {
+     
+     "title" : "Libro 2  ",
+     "description" : " un libro 2",
+     "year" : 2019,
+     "pages" : 41,
+     "isbn" : " 6122018160",
+     "editorial" : " PLANETA ",
+     "edition" : 1,
+     "autor" : " Steven universe",
+     "cover" : " dos.png",
+     "category_id":2
+     
+    }
+
+
+]
