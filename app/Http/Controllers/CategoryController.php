@@ -106,17 +106,18 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         if($category){
-            if($category->delete()){
 
+            if($category->delete()){
                 return response()->json([
-                        'message' =>'registro eliminado',
-                        'code' =>'200'
+                    'message' => 'Registro eliminado correctamente',
+                    'code' =>'200'
                 ]);
             }
+
         }
         return response()->json([
-        'message' =>'no se puede eliminar el registro',
-                        'code' =>'400'
-        ]);
+                    'message' => 'No se pudo eliminar el registro',
+                    'code' =>'400'
+                ]);
     }
 }

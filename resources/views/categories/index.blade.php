@@ -46,11 +46,11 @@
               </td>
               <td>
 
-                <button   onclick="editCategory({{  $category->id }},'{{  $category->name }}','{{ $category->description }}')" class="btn btn-warning" data-toggle="modal" data-target="#editCategoryModal">
+                <button   onclick="editCategory({{  $category->id }},'{{  $category->name }}','{{ $category->description }}', this)" class="btn btn-warning" data-toggle="modal" data-target="#editCategoryModal">
                   Edit Category
                 </button>
 
-                  <button onclick="removeCategory({{  $category->id }})" class="btn btn-danger">
+                  <button onclick="removeCategory({{  $category->id }}, this)" class="btn btn-danger">
                     Remove
                   </button>
               </td>
@@ -159,7 +159,6 @@
 
    <x-slot name="scripts">
     <script type="text/javascript">
-      console.log("hola")
        
         function editCategory(id,name,description){
               $("#name").val(name)
@@ -170,39 +169,41 @@
 
          
         function removeCategory(id,target){
-            swal({
-           title :" are you sure ",
-           text :" are you sure ",
-           icon :"warning",
-            buttons : true,
-            dangerMode: true,
+        swal({
+          title: "¿Está seguro que quiere eliminar la categoría?",
+          text: "Una vez eliminada no se podrá recuperar",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            axios.delete('{{ url('categories') }}/'+id, {
+              id: id,
+              _token: '{{ url( csrf_token() ) }}'
             })
-            .then((willDelete) =>{
+            .then(function (response) {
+              if(response.data.code==200){
+                swal(response.data.message, {
+                  icon: "success",
+                });
 
-              if(willDelete){
-                axios.delete('{{  url('categories') }}/'+id,{
-
-                  id: id,
-                  _token: '{{  csrf_token()  }}'
-                })
-                .then(function(response){
-                  
-                  if(response.data.code==200){
-                    swal(response.data.message ,{
-                       icon: "sucess"
-                    });
-                    $(target).parent().parent().remove();
-                  }
-                })
-                .catch(function (error){
-                   
-                   swal('Error ocurred');
-
+                $(target).parent().parent().remove()
+              }else{
+                swal(response.data.message, {
+                  icon: "error",
                 });
               }
-
+            })
+            .catch(function (error) {
+              swal('Error ocurred',{ icon:'error'});
+              console.log(error);
             });
-        }
+
+            
+          }
+        });
+      }
     </script>     
     </x-slot>
 

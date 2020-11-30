@@ -102,9 +102,17 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(Request $request)
     {
-        
+        $book = Book::find($request->id);
+        $categories = Category::find($request->id);
+        if ($book) {
+            if ($book->update($request->all())) {
+
+                return redirect()->back()->with('success',' fue posible crear el registro ');
+            }
+        }
+        return redirect()->back()->with('error','No fue posible crear el registro');
     }
 
     /**

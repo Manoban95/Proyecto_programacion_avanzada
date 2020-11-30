@@ -75,17 +75,17 @@
               @endif
               </td>
               <td>
-                  <button onclick="requestBook({{  $book->id }},{{  $user->id }})" class="btn btn-success" @if($book->disponibilidad==0) disabled @endif>
+                  <button onclick="requestBook({{  $book->id }},{{  $user->id }},'{{  $book->title }}', this)" class="btn btn-success" @if($book->disponibilidad==0) disabled @endif>
                     Solicitar
                   </button> 
               </td>
               @if(Auth::user()->hasPermissionTo('update books'))
               <td>
-                <button   onclick="editBook({{  $book->id }}, '{{  $book->tittle }}', '{{  $book->description }}', {{  $book->year }}, {{  $book->pages }}, '{{  $book->isbn }}', '{{  $book->editorial }}', {{  $book->edition }}, '{{  $book->autor }}', {{  $book->Category_id }})" class="btn btn-warning" data-toggle="modal" data-target="#editBookModal">
+                <button   onclick="editBook({{  $book->id }}, '{{  $book->title }}', '{{  $book->description }}', {{  $book->year }}, {{  $book->pages }}, '{{  $book->isbn }}', '{{  $book->editorial }}', {{  $book->edition }}, '{{  $book->autor }}', {{  $book->Category_id }}, this)" class="btn btn-warning" data-toggle="modal" data-target="#editBookModal">
                   Edit book
                 </button>
 
-                  <button onclick="removeBook({{  $book->id }})" class="btn btn-danger">
+                  <button onclick="removeBook({{  $book->id }}, this)" class="btn btn-danger">
                     Remove
                   </button>
               </td>
@@ -122,7 +122,7 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
-                              <input type="text" name="title" id="input_tittle" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
+                              <input type="text" name="title" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
                             </div>                          
                           <small id="emailHelp" class="form-text text-muted">Book title.</small>
                         </div>
@@ -221,7 +221,7 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
-                              <select class="form-control" id="input_category" name="input_category_id">
+                              <select class="form-control" id="category_id" name="category_id">
                                 @if (isset($categories) && count($categories)>0)
                                 @foreach ($categories as $category)
 
@@ -254,6 +254,7 @@
           </div>
           <form method="POST" action="{{ url('books')}}" enctype="multipart/form-data">
                   @csrf
+                  @method('PUT')
                   <div class="modal-body">
                       <div class="form-group">
                           <label for="exampleInputEmail1">Title</label>
@@ -261,7 +262,7 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
-                              <input type="text" id="tittle" name="title" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
+                              <input type="text" id="title" name="title" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
                             </div>                          
                           <small id="emailHelp" class="form-text text-muted">Book title.</small>
                         </div>
@@ -360,7 +361,7 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
-                              <select class="form-control" id="category" name="category">
+                              <select class="form-control" id="category" name="category_id">
                                 @if (isset($categories) && count($categories)>0)
                                 @foreach ($categories as $category)
 
@@ -375,6 +376,7 @@
                     <div class="modal-footer">
                       <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
                       <button type="submit" class="btn btn-primary">Save</button>
+                      <input type="hidden" name="id" id="id">
                     </div>
                 </form>
           
@@ -383,11 +385,11 @@
     </div>
 
     <script>
-      function requestBook(idBook,idUser,target){
+      function requestBook(idBook,idUser,title,target){
 
             swal({
-           title :" ¿Está seguro? ",
-           text :" ¿Está seguro que quiere pedir este libro? ",
+           title :" ¿Está seguro que quiere solicitar este libro? ",
+           text :title,
            icon :"warning",
             buttons : true,
             dangerMode: true,
@@ -419,10 +421,10 @@
             });
         }
 
-      function editBook(id,tittle,description,year,pages,isbn,editorial,edition,autor,category){
-            console.log(autor);
+      function editBook(id,title,description,year,pages,isbn,editorial,edition,autor,category_id){
 
-            $("#tittle").val(tittle);
+            $("#id").val(id);
+            $("#title").val(title);
             $("#description").val(description);
             $("#year").val(year);
             $("#pages").val(pages);
@@ -430,7 +432,8 @@
             $("#editorial").val(editorial);
             $("#edition").val(edition);
             $("#autor").val(autor);
-            $("#category").val(category);
+            $("#category").val(category_id);
+            
         }
          
       function removeBook(id,target){
@@ -453,7 +456,7 @@
                   
                   if(response.data.code==200){
                     swal(response.data.message ,{
-                       icon: "sucess"
+                       icon: "success"
                     });
                     $(target).parent().parent().remove();
                   }
