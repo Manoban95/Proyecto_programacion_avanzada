@@ -59,6 +59,11 @@
                             {{ __('categories') }}
                         </x-jet-dropdown-link>
 
+                         <x-jet-dropdown-link href="{{ url('Loan') }}">
+                            {{ __('loan') }}
+                    </x-jet-dropdown-link>
+
+
                       @endif
 
 

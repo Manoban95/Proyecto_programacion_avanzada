@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'Libreria') }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -41,7 +41,7 @@
                             
                            @if (session('success'))
                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                             <strong>Holy guacamole!</strong> se a editado de manera exitosa 
+                             <strong>Hola!</strong> se a editado de manera exitosa 
                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                              </button>
@@ -51,7 +51,7 @@
 
                               @if (session('error'))
                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                             <strong>Holy guacamole!</strong> a habido un error
+                             <strong>Hola !</strong> a habido un error
                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                               <span aria-hidden="true">&times;</span>
                              </button>
@@ -78,7 +78,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
         {{ (isset($scripts))?$scripts:''}}
     </body>
 </html>

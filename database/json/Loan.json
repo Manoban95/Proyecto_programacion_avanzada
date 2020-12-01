@@ -1,0 +1,11 @@
+[
+  
+
+  "book_id" : 1,
+  "user_id" :2 ,
+  "Fecha_prestamo" : "2019-06-21 ",
+  "Fecha_devolucion" : "2019-07-01 ",
+  "Estatus" : "pendiente"
+
+
+]

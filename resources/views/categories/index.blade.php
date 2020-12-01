@@ -51,8 +51,7 @@
                 </button>
 
                   <button onclick="removeCategory({{  $category->id }})" class="btn btn-danger">
-                    Remove
-                    
+                    Remove   
                   </button>
               </td>
             </tr>
@@ -164,7 +163,6 @@
        
         function editCategory(id,name,description){
 
-            console.log("hola")
             $("#name").val(name)
               $("#description").val(description)
                 $("#id").val(id)
@@ -205,8 +203,6 @@
               }
 
             });
-
-
         }
     </script>     
     </x-slot>

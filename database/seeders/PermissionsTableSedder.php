@@ -66,13 +66,10 @@ class PermissionsTableSedder extends Seeder
         ]);
         
           $user->givePermissionTo([
-       
-            
                'view books',
                 'view loans',
                 'add loans',
-                'update loans'
-                
+              
         ]);
       
 
