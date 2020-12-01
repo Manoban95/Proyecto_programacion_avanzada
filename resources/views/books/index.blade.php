@@ -29,76 +29,54 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 
               
+        @if (isset($categories) && count($categories)>0)
+        @foreach ($categories as $category)
 
-              <table class="table table-striped table-bordered">
-          <thead class="thead-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Title</th>
-              <th scope="col">Description</th>
-              <th scope="col">Category</th>
-              <th scope="col">Disponibilidad</th>
-              <th scope="col"></th>
-              @if(Auth::user()->hasPermissionTo('update books'))
-              <th scope="col">Editar/Eliminar</th>
-              @endif
+            <table class="table table-striped table-bordered">
+              <h3> {{ $category->name }} </h3>
+              
+              <div class="card-deck">
+                @foreach($books as $book)
+                @if (isset($books) && count($books)>0 && ($book->Category_id == $category->id))
 
-            </tr>
-          </thead>
-          <tbody>
+                  <div class="card" style="max-width: 20%; min-width: 20%; margin-bottom: 50px; margin-left: 3.3%;">
+                    <img class="card-img-top" src="{{ asset('storage/app/img/books/'.$book->cover) }}" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ $book->title }}</h5>
+                      <p class="card-text">{{ $book->description }}</p>
+                      <div style="display: inline-block; list-style: none">
+
+                          <li style="margin-bottom: 5px;">
+                              <button onclick="requestBook({{  $book->id }},{{  $user->id }},'{{  $book->title }}', this)" class="btn btn-success" @if($book->disponibilidad==0) disabled @endif>
+                                Solicitar
+                              </button>
+                          </li>
+                          @if(Auth::user()->hasPermissionTo('update books'))
+                          <li style="margin-bottom: 5px;"> 
+                            <button   onclick="editBook({{  $book->id }}, '{{  $book->title }}', '{{  $book->description }}', {{  $book->year }}, {{  $book->pages }}, '{{  $book->isbn }}', '{{  $book->editorial }}', {{  $book->edition }}, '{{  $book->autor }}', {{  $book->Category_id }}, this)" class="btn btn-warning" data-toggle="modal" data-target="#editBookModal">
+                                Edit book
+                              </button>
+                            </li>
+                          <li>
+                            <button onclick="removeBook({{  $book->id }}, this)" class="btn btn-danger">
+                                  Remove
+                              </button>
+                          </li>
+                            @endif
+                      </div>
+                    </div>
+                  </div>
+
+                @endif
+               @endforeach
+              </div>
+
+            </table>
+        @endforeach
+        @endif
 
 
-            @if (isset($books) && count($books)>0)
-            @foreach($books as $book)
-            <tr>
-              <th scope="row">
-                {{ $book->id }}
-              </th>
-              <td>
-                {{ $book->title }}
-              </td>
-              <td>
-                {{ $book->description }}
-              </td>
-              <td>
-                {{ $book->Category_id }}
-              </td>
-              <td>
-              @if (isset($books) && $book->disponibilidad==1)
-                  <span clas="badge badge-success">
-                    Disponible
-                  </span>
-                  @else
-                    <span clas="badge badge-success">
-                      No disponible
-                    </span>
-              @endif
-              </td>
-              <td>
-                  <button onclick="requestBook({{  $book->id }},{{  $user->id }},'{{  $book->title }}', this)" class="btn btn-success" @if($book->disponibilidad==0) disabled @endif>
-                    Solicitar
-                  </button> 
-              </td>
-              @if(Auth::user()->hasPermissionTo('update books'))
-              <td>
-                <button   onclick="editBook({{  $book->id }}, '{{  $book->title }}', '{{  $book->description }}', {{  $book->year }}, {{  $book->pages }}, '{{  $book->isbn }}', '{{  $book->editorial }}', {{  $book->edition }}, '{{  $book->autor }}', {{  $book->Category_id }}, this)" class="btn btn-warning" data-toggle="modal" data-target="#editBookModal">
-                  Edit book
-                </button>
-
-                  <button onclick="removeBook({{  $book->id }}, this)" class="btn btn-danger">
-                    Remove
-                  </button>
-              </td>
-              @endif
-
-                
-
-            </tr>
-            
-            @endforeach
-            @endif
-          </tbody>
-        </table>
+  
 
             </div>
         </div>
@@ -252,6 +230,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+
           <form method="POST" action="{{ url('books')}}" enctype="multipart/form-data">
                   @csrf
                   @method('PUT')
