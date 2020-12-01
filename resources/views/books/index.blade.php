@@ -1,5 +1,6 @@
-
-
+  @php
+      use Carbon\Carbon;
+  @endphp
 <x-app-layout>
     <x-slot name="header">
       <div class="row">
@@ -37,37 +38,110 @@
               
               <div class="card-deck">
                 @foreach($books as $book)
-                @if (isset($books) && count($books)>0 && ($book->Category_id == $category->id))
+                  @if (isset($books) && count($books)>0 && ($book->Category_id == $category->id))
+                    @if (isset($loans) && count($loans)>0)
+                      @php
+                      $boolean = 0;
+                      @endphp
+                        @foreach($loans as $loan)
+                          @if($loan->book_id==$book->id)
+                              @php
+                              $boolean = 1;
+                              @endphp
+                            @if($loan->status==0)
+                              
+                               <div class="card" style="max-width: 20%; min-width: 20%; margin-bottom: 50px; margin-left: 3.3%;">
+                                  <img class="card-img-top" src="{{url('carrucel1.jpg')}}" alt="Card image cap">
+                                  <div class="card-body">
+                                    <h5 class="card-title">{{ $book->title }}</h5>
+                                    <p class="card-text">{{ $book->description }}</p>
+                                    <div style="display: inline-block; list-style: none">
 
-                  <div class="card" style="max-width: 20%; min-width: 20%; margin-bottom: 50px; margin-left: 3.3%;">
-                    <img class="card-img-top" src="{{ asset('storage/app/img/books/'.$book->cover) }}" alt="Card image cap">
-                    <div class="card-body">
-                      <h5 class="card-title">{{ $book->title }}</h5>
-                      <p class="card-text">{{ $book->description }}</p>
-                      <div style="display: inline-block; list-style: none">
-
-                          <li style="margin-bottom: 5px;">
-                              <button onclick="requestBook({{  $book->id }},{{  $user->id }},'{{  $book->title }}', this)" class="btn btn-success" @if($book->disponibilidad==0) disabled @endif>
-                                Solicitar
-                              </button>
-                          </li>
-                          @if(Auth::user()->hasPermissionTo('update books'))
-                          <li style="margin-bottom: 5px;"> 
-                            <button   onclick="editBook({{  $book->id }}, '{{  $book->title }}', '{{  $book->description }}', {{  $book->year }}, {{  $book->pages }}, '{{  $book->isbn }}', '{{  $book->editorial }}', {{  $book->edition }}, '{{  $book->autor }}', {{  $book->Category_id }}, this)" class="btn btn-warning" data-toggle="modal" data-target="#editBookModal">
-                                Edit book
-                              </button>
-                            </li>
-                          <li>
-                            <button onclick="removeBook({{  $book->id }}, this)" class="btn btn-danger">
-                                  Remove
-                              </button>
-                          </li>
+                                        <li style="margin-bottom: 5px;">
+                                            <button onclick="requestBook({{  $book->id }},{{  $user->id }},'{{ Carbon::now()->timezone('America/Hermosillo')}}', this)" class="btn btn-success"  >
+                                              Solicitar
+                                            </button>
+                                        </li>
+                                        @if(Auth::user()->hasPermissionTo('update books'))
+                                        <li style="margin-bottom: 5px;"> 
+                                          <button   onclick="editBook({{  $book->id }}, '{{  $book->title }}', '{{  $book->description }}', {{  $book->year }}, {{  $book->pages }}, '{{  $book->isbn }}', '{{  $book->editorial }}', {{  $book->edition }}, '{{  $book->autor }}', {{  $book->Category_id }}, this)" class="btn btn-warning" data-toggle="modal" data-target="#editBookModal">
+                                              Edit book
+                                            </button>
+                                          </li>
+                                        <li>
+                                          <button onclick="removeBook({{  $book->id }}, this)" class="btn btn-danger">
+                                                Remove
+                                            </button>
+                                        </li>
+                                          @endif
+                                    </div>
+                                  </div>
+                               </div>
+                                 @php
+                                  $boolean = 0;
+                                 @endphp
                             @endif
-                      </div>
-                    </div>
-                  </div>
+                            @endif
+                        @endforeach
+                          @if($boolean==0)
+                               <div class="card" style="max-width: 20%; min-width: 20%; margin-bottom: 50px; margin-left: 3.3%;">
+                                  <img class="card-img-top" src="{{url('carrucel1.jpg')}}" alt="Card image cap">
+                                  <div class="card-body">
+                                    <h5 class="card-title">{{ $book->title }}</h5>
+                                    <p class="card-text">{{ $book->description }}</p>
+                                    <div style="display: inline-block; list-style: none">
 
-                @endif
+                                        <li style="margin-bottom: 5px;">
+                                            <button onclick="requestBook({{  $book->id }},{{  $user->id }},'{{ Carbon::now()->timezone('America/Hermosillo')}}', this)" class="btn btn-success"  >
+                                              Solicitar
+                                            </button>
+                                        </li>
+                                        @if(Auth::user()->hasPermissionTo('update books'))
+                                        <li style="margin-bottom: 5px;"> 
+                                          <button   onclick="editBook({{  $book->id }}, '{{  $book->title }}', '{{  $book->description }}', {{  $book->year }}, {{  $book->pages }}, '{{  $book->isbn }}', '{{  $book->editorial }}', {{  $book->edition }}, '{{  $book->autor }}', {{  $book->Category_id }}, this)" class="btn btn-warning" data-toggle="modal" data-target="#editBookModal">
+                                              Edit book
+                                            </button>
+                                          </li>
+                                        <li>
+                                          <button onclick="removeBook({{  $book->id }}, this)" class="btn btn-danger">
+                                                Remove
+                                            </button>
+                                        </li>
+                                          @endif
+                                    </div>
+                                  </div>
+                               </div>
+                          @endif
+                    @elseif(1==1)
+                       <div class="card" style="max-width: 20%; min-width: 20%; margin-bottom: 50px; margin-left: 3.3%;">
+                          <img class="card-img-top" src="{{url('carrucel1.jpg')}}" alt="Card image cap">
+                          <div class="card-body">
+                            <h5 class="card-title">{{ $book->title }}</h5>
+                            <p class="card-text">{{ $book->description }}</p>
+                            <div style="display: inline-block; list-style: none">
+
+                                <li style="margin-bottom: 5px;">
+                                    <button onclick="requestBook({{  $book->id }},{{  $user->id }},'{{ Carbon::now()->timezone('America/Hermosillo')}}', this)" class="btn btn-success"  >
+                                      Solicitar
+                                    </button>
+                                </li>
+                                @if(Auth::user()->hasPermissionTo('update books'))
+                                <li style="margin-bottom: 5px;"> 
+                                  <button   onclick="editBook({{  $book->id }}, '{{  $book->title }}', '{{  $book->description }}', {{  $book->year }}, {{  $book->pages }}, '{{  $book->isbn }}', '{{  $book->editorial }}', {{  $book->edition }}, '{{  $book->autor }}', {{  $book->Category_id }}, this)" class="btn btn-warning" data-toggle="modal" data-target="#editBookModal">
+                                      Edit book
+                                    </button>
+                                  </li>
+                                <li>
+                                  <button onclick="removeBook({{  $book->id }}, this)" class="btn btn-danger">
+                                        Remove
+                                    </button>
+                                </li>
+                                  @endif
+                            </div>
+                          </div>
+                       </div>
+                    @endif
+                  @endif
                @endforeach
               </div>
 
@@ -363,7 +437,7 @@
       </div>
     </div>
 
-    <script>
+    <script type="text/javascript">
       function requestBook(idBook,idUser,title,target){
 
             swal({
@@ -414,6 +488,42 @@
             $("#category").val(category_id);
             
         }
+
+        function requestBook(book_id, user_id, loan_date, target) {
+                swal({
+                    title: "Are you sure?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: false,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                     console.log("willDelete");
+                        axios.post('/loans', {
+                            book_id: book_id,
+                            user_id: user_id,
+                            loan_date: loan_date,
+                            status: 1
+                        })
+                    .then(function (response) {
+                        if (response.data.code == 200) {
+                          console.log("success");
+                            swal( response.data.message, {
+                              icon: "success",
+                            });
+                            $(target).parent().parent().remove();
+                        } else {
+                          console.log("error");
+                            swal( response.data.message, {
+                              icon: "error",
+                            });
+                        }
+                      })
+                      .catch(function (error) {
+                    });
+                  }
+                });
+            }
          
       function removeBook(id,target){
             swal({

@@ -30,11 +30,6 @@ class CreateBooksTable extends Migration
             $table->unsignedBigInteger('Category_id')->nullable();
 
             $table->foreign('category_id')->references('id')->on('categories')  ;
-
-            $table->boolean('disponibilidad')->default(true);
-
-            
-
             $table->timestamps();
         });
     }
