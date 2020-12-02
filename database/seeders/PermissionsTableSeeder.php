@@ -70,7 +70,6 @@ class PermissionsTableSeeder extends Seeder
                'view books',
                 'view loans',
                 'add loans',
-                'update loans'
                 
         ]);
 

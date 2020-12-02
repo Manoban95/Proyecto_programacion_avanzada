@@ -29,10 +29,57 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 
-              
         @if (isset($categories) && count($categories)>0)
         @foreach ($categories as $category)
+            <table class="table table-striped table-bordered">
+              <h3> {{ $category->name }} </h3>
+              
+              <div class="card-deck">
+                @foreach($books as $book)
+                  @if (isset($books) && count($books)>0 && ($book->Category_id == $category->id))
+                  <div class="card" style="max-width: 20%; min-width: 20%; margin-bottom: 50px; margin-left: 3.3%;">
+                                  <img class="card-img-top" src="{{url('carrucel1.jpg')}}" alt="Card image cap">
+                                  <div class="card-body">
+                                    <h5 class="card-title">{{ $book->title }}</h5>
+                                    <p class="card-text">{{ $book->description }}</p>
+                                    <div style="display: inline-block; list-style: none">
 
+                                        <li style="margin-bottom: 5px;">
+                                            <button onclick="requestBook({{  $book->id }},{{  $user->id }},'{{ Carbon::now()->timezone('America/Hermosillo')}}', this)" class="btn btn-success"  >
+                                              <span>Solicitar</span>
+                                            </button>
+                                        </li>
+                                        @if(Auth::user()->hasPermissionTo('update books'))
+                                        <li style="margin-bottom: 5px;"> 
+                                          <button   onclick="editBook({{  $book->id }}, '{{  $book->title }}', '{{  $book->description }}', {{  $book->year }}, {{  $book->pages }}, '{{  $book->isbn }}', '{{  $book->editorial }}', {{  $book->edition }}, '{{  $book->autor }}', {{  $book->Category_id }}, this)" class="btn btn-warning" data-toggle="modal" data-target="#editBookModal">
+                                              <span>Edit book</span>
+                                            </button>
+                                          </li>
+                                        <li>
+                                          <button style="margin-bottom: 5px;" onclick="removeBook({{  $book->id }}, this)" class="btn btn-danger">
+                                                <span>Remove</span>
+                                            </button>
+                                        </li>
+                                        <li>
+                                          <a href="{{url('/books/'.$book->id)}}" >
+                                              <button class="btn btn-primary float-right">
+                                                 <span>Registro</span>
+                                              </button>
+                                          </a>
+                                        </li>
+                                          @endif
+                                    </div>
+                                  </div>
+                  </div>
+                  @endif
+                @endforeach
+              </div>
+          </table>
+        @endforeach
+        @endif
+
+        {{-- @if (isset($categories) && count($categories)>0)
+        @foreach ($categories as $category)
             <table class="table table-striped table-bordered">
               <h3> {{ $category->name }} </h3>
               
@@ -45,11 +92,11 @@
                       @endphp
                         @foreach($loans as $loan)
                           @if($loan->book_id==$book->id)
+                              
+                            @if($loan->status==0 && $boolean==0)
                               @php
                               $boolean = 1;
                               @endphp
-                            @if($loan->status==0)
-                              
                                <div class="card" style="max-width: 20%; min-width: 20%; margin-bottom: 50px; margin-left: 3.3%;">
                                   <img class="card-img-top" src="{{url('carrucel1.jpg')}}" alt="Card image cap">
                                   <div class="card-body">
@@ -77,9 +124,7 @@
                                     </div>
                                   </div>
                                </div>
-                                 @php
-                                  $boolean = 0;
-                                 @endphp
+                                 
                             @endif
                             @endif
                         @endforeach
@@ -112,7 +157,7 @@
                                   </div>
                                </div>
                           @endif
-                    @elseif(1==1)
+                    @else
                        <div class="card" style="max-width: 20%; min-width: 20%; margin-bottom: 50px; margin-left: 3.3%;">
                           <img class="card-img-top" src="{{url('carrucel1.jpg')}}" alt="Card image cap">
                           <div class="card-body">
@@ -144,10 +189,9 @@
                   @endif
                @endforeach
               </div>
-
             </table>
         @endforeach
-        @endif
+        @endif --}}
 
 
   

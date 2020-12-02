@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Loan;
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -17,10 +18,6 @@ class BookController extends Controller
      */
     public function index()
     {
-
-
-
-
         $books = Book::all();
         $categories = Category::all();
         $loans = Loan::all();
@@ -85,7 +82,14 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        $loans = Loan::all();
+        $users = User::all();
+        $books = Book::all();
+        if(Auth::user()->hasPermissionTo('update books')){
+         return view('books.registro',compact('book','loans','users','books'));
+        }else{
+            return redirect()->back()->with("error","You don't have permissions");
+        }
     }
 
     /**

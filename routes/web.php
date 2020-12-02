@@ -22,6 +22,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('/books','BookController@index');
 
+Route::get('/books/{book}','BookController@show');
+
 Route::POST('/books','BookController@store');
 
 Route::put('/books', 'BookController@update');
@@ -41,9 +43,13 @@ Route::delete('/categories/{category}','CategoryController@destroy');
 //LOANS
 Route::get('/loans','LoanController@index');
 
+Route::get('/loans/{user}','LoanController@show');
+
 Route::post('/loans','LoanController@store');
 
 Route::put('/loans', 'LoanController@update');
+
+
 
 /*Route::delete('/loans/{loan}','LoanController@destroy');*/
 

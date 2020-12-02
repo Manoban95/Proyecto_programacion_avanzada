@@ -6,6 +6,7 @@ use App\Models\Loan;
 use App\Models\Book;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Auth;
 
 class LoanController extends Controller
 {
@@ -60,10 +61,18 @@ class LoanController extends Controller
      * @param  \App\Models\Loan  $loan
      * @return \Illuminate\Http\Response
      */
-    public function show(Loan $loan)
+    public function show(Loan $user)
     {
-        //
+        $loans = Loan::all();
+        $users = User::all();
+        $books = Book::all();
+        if(Auth::user()->hasPermissionTo('view users')){
+         return view('loans.historial',compact('user','loans','users','books'));
+        }else{
+            return redirect()->back()->with("error","You don't have permissions");
+        }
     }
+
 
     /**
      * Show the form for editing the specified resource.
