@@ -29,6 +29,12 @@ Route::post('/categories','CategoryController@store');
 Route::put('/categories', 'CategoryController@update');
 Route::delete('/categories/{category}','CategoryController@destroy');
 
+Route::get('/user', 'UserController@index');
+Route::post('/user','UserController@store');
+Route::delete('/user/{user}','UserController@destroy');
+Route::put('/user', 'UserController@update');
+
+
 
 
 

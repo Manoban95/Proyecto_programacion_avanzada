@@ -27,7 +27,6 @@ class CreateLoansTable extends Migration
             $table->date('Fecha_devolucion')->default('2019-12-10 14:00');
             $table->string('Estatus')->nullable();
 
-    
 
             $table->timestamps();
         });

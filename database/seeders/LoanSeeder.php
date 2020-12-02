@@ -50,15 +50,6 @@ class LoanSeeder extends Seeder
 
 
         
-        
-
-
-       
-
-
-        
-
-
        
 
 

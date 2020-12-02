@@ -19,15 +19,41 @@ class UserTableSedder extends Seeder
         $user->name = "esteban lizarraga";
         $user->email = "esteban.daniel99@hotmail.com";
         $user->password = bcrypt("secret");
-          $user->role_id = 1; 
-         $user->save(); 
+        $user->role_id = 1; 
+        $user->save(); 
 
-          $user = new User();
+
+        $user = new User();
         $user->name = "daniel cota";
         $user->email = "danielcota99@hotmail.com";
         $user->password = bcrypt("darkside99");
-          $user->role_id = 2; 
-         $user->save(); 
+        $user->role_id = 2; 
+        $user->save(); 
+
+        $user = new User();
+        $user->name = "manoban";
+        $user->email = "manoban@hotmail.com";
+        $user->password = bcrypt("manoban");
+        $user->role_id = 2; 
+        $user->save();
+
+        $user = new User();
+        $user->name = "joel";
+        $user->email = "joel@hotmail.com";
+        $user->password = bcrypt("joel");
+        $user->role_id = 2; 
+        $user->save();
+
+
+        $user = new User();
+        $user->name = "pepe";
+        $user->email = "pepe@hotmail.com";
+        $user->password = bcrypt("pepe");
+        $user->role_id = 1; 
+        $user->save();
+
+
+
 
 
 

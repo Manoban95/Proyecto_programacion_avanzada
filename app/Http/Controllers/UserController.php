@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Category;
+use App\Models\User;
 use Illuminate\Http\Request;
-use Auth;
-class CategoryController extends Controller
+
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,20 +13,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-
-        if(Auth::user()->hasPermissionTo('crud categories')){
-
-
-          $categories = Category::all();
-        return view('categories.index', compact('categories'));
-
-        }else
-        return redirect()->back()->with('error','NO fue posible crear el registro');
+        
+         $users = User::all();
+        return view('user.index',compact('users'));
+        
     }
-
-
-
-    
 
     /**
      * Show the form for creating a new resource.
@@ -45,9 +35,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   public function store(Request $request)
+    public function store(Request $request)
     {
-        if ($category = Category::create($request->all())) {
+        
+        if ($user = User::create($request->all())) {
 
             return redirect()->back();
 
@@ -58,10 +49,10 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show($id)
     {
         //
     }
@@ -69,10 +60,10 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
         //
     }
@@ -81,14 +72,14 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
     {
-        $category = Category::find($request->id);
-        if ($category) {
-            if ($category->update($request->all())) {
+         $user = User::find($request->id);
+        if ($user) {
+            if ($user->update($request->all())) {
 
                 return redirect()->back()->with('success',' fue posible crear el registro ');
             }
@@ -99,13 +90,13 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(User $user)
     {
-        if($category){
-            if($category->delete()){
+       if($user){
+            if($user->delete()){
 
                 return response()->json([
                         'message' =>'registro eliminado',
@@ -117,5 +108,6 @@ class CategoryController extends Controller
         'message' =>'no se puede eliminar el registro',
                         'code' =>'400'
         ]);
+
     }
 }
