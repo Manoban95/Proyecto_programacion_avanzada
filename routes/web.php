@@ -50,11 +50,19 @@ Route::post('/loans','LoanController@store');
 Route::put('/loans', 'LoanController@update');
 
 
-
 /*Route::delete('/loans/{loan}','LoanController@destroy');*/
 
+//USER
+Route::get('/user', 'UserController@index');
 
-Route::get('/user','CategoryController@index');
+Route::post('/user','UserController@store');
+
+Route::delete('/user/{user}','UserController@destroy');
+
+Route::put('/user', 'UserController@update');
+
+
+//Route::get('/user','CategoryController@index');
 
 
     

@@ -63,6 +63,12 @@
                                 {{ __('Categorías') }}
                             </x-jet-dropdown-link>
                          @endif
+                         @if(Auth::user()->hasPermissionTo('view users'))
+
+                             <x-jet-dropdown-link href="{{ url('user') }}">
+                                {{ __('Usuarios') }}
+                            </x-jet-dropdown-link>
+                         @endif
 
 
 
