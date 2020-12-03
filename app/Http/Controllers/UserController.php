@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -41,6 +42,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         if($user = User::create($request->all())){
+                $user->role_id = $request->role_id;
                 $user->password =  Hash::make($request['password']);
                 $user->save();
                 return  redirect()->back()->with('success', 'User created successfully');
@@ -79,15 +81,32 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $user = User::find($request->id);
-        if ($user) {
-            if ($user->update($request->all())) {
+
+        $user = User::find($request['id']);
+           if($user!=null){
+               $user->role_id = $request->role_id;
+               $user->Update($request->all());
+               return  redirect()->back()->with('success', 'The user has been updated');
+           }
+           return redirect()->back()->with('error', 'Sorry, user not updated, try again');
+        /*$user = User::find($request->id);
+        if($user!=null){
+               $user->role_id = $request->role_id;
+               $user->password =  Hash::make($request->password);
+               $user->save();
+               $user->Update($request->all());
+               if ($user->update($request->all())) {
                 $user->password =  Hash::make($request['password']);
+                $user->role_id = $request->role_id;
                 $user->save();
-                return redirect()->back()->with('success',' fue posible crear el registro ');
+                return  redirect()->back()->with('success', 'Se ha actualizado el usuario');
             }
-        }
-        return redirect()->back()->with('error','No fue posible crear el registro');
+           }else{
+            return redirect()->back()->with('error', 'Sorry, user not updated, try again');
+           }*/
+        
+           
+           
     }
 
     /**

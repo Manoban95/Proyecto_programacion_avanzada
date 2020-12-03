@@ -236,44 +236,43 @@
           $("#id").val(id);
         }
 
-            function showHistory(target){
-              $("#history_Table").show();
-              $("#loan_Table").hide();
-            }
+        function showHistory(target){
+          $("#history_Table").show();
+          $("#loan_Table").hide();
+        }
 
-            function returnBook(id, book_id, return_date, target) {
-              console.log(book_id)
-                swal({
-                    title: "Are you sure?",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: false,
+        function returnBook(id, book_id, return_date, target) {
+            swal({
+                title: "Are you sure?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: false,
+            })
+            .then((willDelete) => {
+              if (willDelete) {
+                
+                axios.put('/loans', {
+                    id: id,
+                    status: 0,
+                    return_date: return_date
                 })
-                .then((willDelete) => {
-                  if (willDelete) {
-                    
-                    axios.put('/loans', {
-                        id: id,
-                        status: 0,
-                        return_date: return_date
-                    })
-                    .then(function (response) {
-                        if (response.data.code == 200) {
-                            swal( response.data.message, {
-                              icon: "success",
-                            });
-                            $(target).parent().parent().remove();
-                        } else {
-                            swal( response.data.message, {
-                              icon: "error",
-                            });
-                        }
-                      })
-                      .catch(function (error) {
-                    });
-                  }
+                .then(function (response) {
+                    if (response.data.code == 200) {
+                        swal( response.data.message, {
+                          icon: "success",
+                        });
+                        $(target).parent().parent().remove();
+                    } else {
+                        swal( response.data.message, {
+                          icon: "error",
+                        });
+                    }
+                  })
+                  .catch(function (error) {
                 });
-            }
+              }
+            });
+        }
 
         </script>
 

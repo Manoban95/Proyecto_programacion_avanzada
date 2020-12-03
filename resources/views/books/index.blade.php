@@ -55,11 +55,9 @@
                                               <span>Edit book</span>
                                             </button>
                                           </li>
-                                        <li>
                                           <button style="margin-bottom: 5px;" onclick="removeBook({{  $book->id }}, this)" class="btn btn-danger">
                                                 <span>Remove</span>
                                             </button>
-                                        </li>
                                         <li>
                                           <a href="{{url('/books/'.$book->id)}}" >
                                               <button class="btn btn-primary float-right">
@@ -555,7 +553,7 @@
                             swal( response.data.message, {
                               icon: "success",
                             });
-                            $(target).parent().parent().remove();
+                            $(target).parent().parent().parent().remove();
                         } else {
                           console.log("error");
                             swal( response.data.message, {
@@ -591,7 +589,7 @@
                     swal(response.data.message ,{
                        icon: "success"
                     });
-                    $(target).parent().parent().remove();
+                    $(target).parent().parent().parent().remove();
                   }
                 })
                 .catch(function (error){

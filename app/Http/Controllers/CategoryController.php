@@ -26,6 +26,12 @@ class CategoryController extends Controller
     }
 
 
+        /*$user = User::find($request->id);
+           if($request->password==null){
+               $user->role_id = $request->role_id;
+               $user->Update($request->all());
+               return  redirect()->back()->with('success', 'Se ha actualizado el usuario');
+           }*/
 
     
 
@@ -90,7 +96,6 @@ class CategoryController extends Controller
         $category = Category::find($request->id);
         if ($category) {
             if ($category->update($request->all())) {
-
                 return redirect()->back()->with('success',' fue posible crear el registro ');
             }
         }

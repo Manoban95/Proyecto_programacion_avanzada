@@ -97,8 +97,16 @@ class LoanController extends Controller
         $loan = Loan::find($request->id);
         if ($loan) {
             if ($loan->update($request->all())) {
-
+                return response()->json([
+                        'message' =>'registro eliminado',
+                        'code' =>'200'
+                ]);
                 return redirect()->back()->with('success',' fue posible crear el registro ');
+            }else{
+                return response()->json([
+                'message' =>'no se puede eliminar el registro',
+                                'code' =>'400'
+                ]);
             }
         }
         return redirect()->back()->with('error','NO fue posible crear el registro');
