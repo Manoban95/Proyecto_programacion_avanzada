@@ -14,9 +14,9 @@
     <body>
         <div style="width: 100%; height: 100%; background-image:url({{url('body_background.jpg')}}); background-repeat: no-repeat; background-attachment: fixed; background-size: cover; " >
             
-          <!-- <div style="background-color: white" class="row col-6">
+         {{--  <div style="background-color: white" class="row col-6">
             <canvas id="myChart" width="400" height="400"></canvas>
-          </div> -->
+          </div> --}}
 
           
             <div>
@@ -89,17 +89,14 @@
 
 
 
-      /*var loans = */
-      /*<?php echo json_encode($data) ?> ;*/
-      
-    /*  var arreglo = JSON.parse(loans);
-      
-      var valores = [];*/
+      /*var loans =*/ /*<?php echo json_encode($data) ?>*/ /*;*/
+      /*
+      var valores = [];
 
 
       
 
-      /*var ctx = document.getElementById('myChart').getContext('2d');
+      var ctx = document.getElementById('myChart').getContext('2d');
       var myChart = new Chart(ctx, {
           type: 'bar',
           data: {
@@ -136,12 +133,12 @@
               }
           }
       });*/
-/*
-      for (var i = 0; i< arreglo.length ; i++) {
-        console.log(1);
-      }
 
-*/
+      /*for (var i = 1; i< loans.length ; i++) {
+        console.log(1);
+      }*/
+
+
       
 
       /*var booksName[];

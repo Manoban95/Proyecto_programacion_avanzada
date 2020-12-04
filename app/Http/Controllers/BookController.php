@@ -21,8 +21,9 @@ class BookController extends Controller
         $books = Book::all();
         $categories = Category::all();
         $loans = Loan::all();
+        $users = User::all();
 
-        return view('books.index', compact('books', 'categories', 'loans'));
+        return view('books.index', compact('books', 'categories', 'loans','users'));
     }
 
     /**

@@ -16,7 +16,11 @@
            @if (Auth::user()->hasPermissionTo('add books')) 
                    <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addBookModal">
                     Add Book
-                  </button>       
+                  </button>
+
+                  <button style="margin-right: 5px;" class="btn btn-warning float-right" data-toggle="modal" data-target="#showAllBooksModal">
+                    Todos los libros
+                  </button> 
 
 
            @endif
@@ -32,13 +36,31 @@
         @if (isset($categories) && count($categories)>0)
         @foreach ($categories as $category)
             <table class="table table-striped table-bordered">
+
               <h3> {{ $category->name }} </h3>
               
               <div class="card-deck">
                 @foreach($books as $book)
                   @if (isset($books) && count($books)>0 && ($book->Category_id == $category->id))
+                    @php
+                      $boolean=0;
+                    @endphp
+                  @foreach($loans as $loan)
+                    @if($loan->status==1 && $loan->book_id==$book->id)
+                        @if($boolean==0)
+                          @php
+                            $boolean=1;
+                          @endphp
+                        @else
+                          @php
+                            $boolean=0;
+                          @endphp
+                        @endif
+                    @endif
+                  @endforeach
+                  @if($boolean==0)
                   <div class="card" style="max-width: 20%; min-width: 20%; margin-bottom: 50px; margin-left: 3.3%;">
-                                  <img class="card-img-top" src="{{url('carrucel1.jpg')}}" alt="Card image cap">
+                                  <img class="card-img-top" src="{{$book->cover}}" alt="Card image cap">
                                   <div class="card-body">
                                     <h5 class="card-title">{{ $book->title }}</h5>
                                     <p class="card-text">{{ $book->description }}</p>
@@ -69,6 +91,8 @@
                                     </div>
                                   </div>
                   </div>
+                  @endif
+                  
                   @endif
                 @endforeach
               </div>
@@ -195,6 +219,106 @@
   
 
             </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="showAllBooksModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Todos los libros</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <div class="modal-body">
+              
+              <div class="py-12">
+          
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                          <table class="table table-striped table-bordered">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Titulo</th>
+                          <th scope="col">Usuario que lo tiene</th>
+                          <th scope="col">Disponibilidad</th>
+                          <th scope="col"></th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+
+                        
+                         @foreach($books as $book)
+                              <tr class="loan_Table" >
+                                      <td>
+                                        {{ $book->id }}
+                                      </td>
+                                      <td>
+                                        {{ $book->title }}
+                                      </td>
+                                      <td>
+                                       @foreach($loans as $loan)
+                                          @if($loan->book_id==$book->id && $loan->status==1)
+                                            @foreach($users as $user)
+                                             @if($user->id==$loan->user_id)
+                                                {{ $user->name }}
+                                              @endif
+                                             @endforeach
+                                          @endif
+                                        @endforeach
+                                      </td>
+                                      <td>
+                                          @php
+                                            $boolean=0;
+                                          @endphp
+                                        @foreach($loans as $loan)
+                                          @if($loan->book_id==$book->id)
+                                               
+                                              @if($loan->book_id == $book->id)
+                                                @php
+                                                 $boolean=1;
+                                                @endphp
+                                                  @if($loan->status==1 )
+                                                    <span>Ocupado</span>
+                                                  @else
+                                                    <span>Disponible</span>
+                                                  @endif
+
+                                              @endif
+                                          @endif
+                                        @endforeach
+                                        @if($boolean==0)
+                                          <span>Disponible</span>
+                                        @endif
+                                      </td>
+                                      <td>
+                                          <a href="{{url('/books/'.$book->id)}}" >
+                                              <button class="btn btn-primary float-right">
+                                                 Registro
+                                              </button>
+                                          </a>
+                                           
+                                      </td>
+
+                              </tr>
+                          @endforeach
+                      </tbody>
+                    </table>
+
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+              </div>
+            
+            
+          </div>
         </div>
     </div>
 
@@ -553,7 +677,7 @@
                             swal( response.data.message, {
                               icon: "success",
                             });
-                            $(target).parent().parent().parent().remove();
+                            $(target).parent().parent().parent().parent().remove();
                         } else {
                           console.log("error");
                             swal( response.data.message, {
