@@ -566,6 +566,8 @@
                   }
                 });
             }
+
+            
          
       function removeBook(id,target){
             swal({
