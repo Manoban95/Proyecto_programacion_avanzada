@@ -243,7 +243,7 @@
 
         function returnBook(id, book_id, return_date, target) {
             swal({
-                title: "Are you sure?",
+                title: "¿Está seguro de que quiere regresar el libro?",
                 icon: "warning",
                 buttons: true,
                 dangerMode: false,

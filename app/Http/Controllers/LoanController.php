@@ -82,12 +82,12 @@ class LoanController extends Controller
         if($loan = Loan::create($request->all())) {
             if ($loan) {
                 return response()->json([
-                    'message' => "Loan complete.",
+                    'message' => "Prestamo realizado",
                     'code' => "200"
                 ]);
             }
             return response()->json([
-                'message' => "Could not be loant.",
+                'message' => "No se ha podido realizar el préstamo",
                 'code' => "400"
             ]);
         }
@@ -107,7 +107,7 @@ class LoanController extends Controller
         if(Auth::user()->hasPermissionTo('view users')){
          return view('loans.historial',compact('user','loans','users','books'));
         }else{
-            return redirect()->back()->with("error","You don't have permissions");
+            return redirect()->back()->with("error","No tienes permiso");
         }
     }
 

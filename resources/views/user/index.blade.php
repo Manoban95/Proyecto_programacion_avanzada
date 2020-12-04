@@ -22,11 +22,11 @@
           <thead class="thead-dark">
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">Name</th>
+              <th scope="col">Nombre</th>
               <th scope="col">Email</th>
               <th scope="col">Rol</th>
-              <th scope="col">Update</th>
-              <th scope="col">Remove</th>
+              <th scope="col">Actualizar</th>
+              <th scope="col">Eliminar</th>
 
 
             </tr>
@@ -65,13 +65,13 @@
                 <td>
                  
                 <button   onclick="editUser({{  $user->id }},'{{  $user->name }}','{{ $user->email }}','{{  $user->role_id }}', this)" class="btn btn-warning" data-toggle="modal" data-target="#editUserModal">
-                  Nombre/Email/Rol
+                  Editar
                 </button>
 
                </td>
                 <td>
                  <button onclick="removeUser({{  $user->id }}, this)" class="btn btn-danger">
-                   Remover
+                   Eliminar
                  </button>
                </td>
              
@@ -104,12 +104,12 @@
                             <div class="modal-body">   
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Name</label>
+                                    <label for="exampleInputEmail1">Nombre</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">@</span>
                                         </div>
-                                        <input type="text" required class="form-control" placeholder="User Name" id="name_input" name="name" aria-label="User Name" aria-describedby="basic-addon1">
+                                        <input required type="text" required class="form-control" placeholder="Nombre de usuario" id="name_input" name="name" aria-label="User Name" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
 
@@ -119,17 +119,17 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">@</span>
                                         </div>
-                                        <input type="email" required class="form-control" name="email" id="email_input" placeholder="E-Mail">
+                                        <input required type="email" required class="form-control" name="email" id="email_input" placeholder="E-Mail">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Password</label>
+                                    <label for="exampleInputEmail1">Contraseña</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="basic-addon1">@</span>
                                         </div>
-                                        <input type="password" required class="form-control" name="password" id="password_input" placeholder="">
+                                        <input required type="password" required class="form-control" name="password" id="password_input" placeholder="">
                                     </div>
                                 </div>
 
@@ -148,7 +148,7 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                 <button type="submit" class="btn btn-primary">Crear</button>
                             </div>
                         </form>
@@ -160,7 +160,7 @@
                   <div class="modal-dialog modal-lg" role="document">
                       <div class="modal-content">
                           <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Edit new User</h5>
+                              <h5 class="modal-title" id="exampleModalLabel">Editar usuario</h5>
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">&times;</span>
                               </button>
@@ -171,7 +171,7 @@
                               <div class="modal-body">
                                   
                                   <div class="form-group">
-                                      <label for="exampleInputEmail1">Name</label>
+                                      <label for="exampleInputEmail1">Nombre</label>
                                       <div class="input-group mb-3">
                                           <div class="input-group-prepend">
                                             <label class="input-group-text" for="arole_id">@</label>
@@ -191,14 +191,14 @@
                                   </div>
 
                                   <div class="form-group">
-                                      <label for="exampleInputEmail1">Role</label>
+                                      <label for="exampleInputEmail1">Rol</label>
                                       <div class="input-group mb-3">
                                           <div class="input-group-prepend">
                                               <label class="input-group-text" for="arole_id">@</label>
                                           </div>
                                           <select class="custom-select" name="role_id" id="role_id">
-                                              <option value="1">Administrator</option>
-                                              <option value="2">Client</option>
+                                              <option value="1">Admin</option>
+                                              <option value="2">Usuario</option>
                                           </select>
                                       </div>
                                   </div>

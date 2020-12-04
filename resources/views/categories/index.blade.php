@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-4 col-12">
           <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addCategoryModal">
-            Add Category
+            Agregar categoría
           </button>       
         </div>
       </div>     
@@ -26,9 +26,9 @@
           <thead class="thead-dark">
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Name</th>
-              <th scope="col">Description</th>
-                <th scope="col">Edit Category</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Descripción</th>
+                <th scope="col">Editar categoría</th>
             </tr>
           </thead>
           <tbody>
@@ -47,11 +47,11 @@
               <td>
 
                 <button   onclick="editCategory({{  $category->id }},'{{  $category->name }}','{{ $category->description }}', this)" class="btn btn-warning" data-toggle="modal" data-target="#editCategoryModal">
-                  Edit Category
+                  Editar categoría
                 </button>
 
                   <button onclick="removeCategory({{  $category->id }}, this)" class="btn btn-danger">
-                    Remove
+                    Eliminar
                   </button>
               </td>
             </tr>
@@ -69,7 +69,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add new category</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Agregar nueva categoría</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -80,19 +80,19 @@
             <div class="modal-body">
               
                <div class="form-group">
-              <label for="exampleInputEmail1">Name</label>   
+              <label for="exampleInputEmail1">Nombre</label>   
                   <div class="input-group-prepend">
                   <span class="input-group-text" id="basic-addon1">@</span>
-                  <input type="text" class="form-control" placeholder="Category" id="input_name" name="name" aria-label="Category" aria-describedby="basic-addon1"></div>
+                  <input required type="text" class="form-control" placeholder="Categoría" id="input_name" name="name" aria-label="Category" aria-describedby="basic-addon1"></div>
             </div>
 
             <div class="form-group">
-              <label for="exampleInputEmail1">Description</label>
+              <label for="exampleInputEmail1">Descripción</label>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">@</span>
               </div>
-              <input class="form-control" rows="5" placeholder="description of de category" id="input_description" name="description">
+              <input required class="form-control" rows="5" placeholder="Descripción de la categoría" id="input_description" name="description">
               </div>
               
             </div>
@@ -101,8 +101,8 @@
 
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary">Save category</button>
+              <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary">Guardar categoría</button>
             </div>
           </form>
         </div>
@@ -127,27 +127,27 @@
           <div class="modal-body">
             
              <div class="form-group">
-                <label for="exampleInputEmail1">Name</label>   
+                <label for="exampleInputEmail1">Nombre</label>   
                 <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon1">@</span>
-                <input type="text" class="form-control" placeholder="Category" id="name" name="name" aria-label="Category" aria-describedby="basic-addon1"></div>
+                <input type="text" class="form-control" placeholder="Categoría" id="name" name="name" aria-label="Category" aria-describedby="basic-addon1"></div>
              </div>
 
           <div class="form-group">
-            <label for="exampleInputEmail1">Description</label>
+            <label for="exampleInputEmail1">Descripción</label>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
               <span class="input-group-text" id="basic-addon1">@</span>
             </div>
-            <input class="form-control" rows="5" placeholder="description of de category" id="description" name="description">
+            <input class="form-control" rows="5" placeholder="Descripción de la catogería" id="description" name="description">
             </div>
             
           </div>
 
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary">Save category</button>
+          <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar categoría</button>
 
           <input type="hidden" name="id" id="id">
 

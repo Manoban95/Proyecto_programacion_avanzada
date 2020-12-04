@@ -6,7 +6,7 @@
       <div class="row">
         <div class="col-md-8 col-12">
           <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Books') }}
+                {{ __('Libros') }}
             </h2>
         </div>
         <div class="col-md-4 col-12">
@@ -15,7 +15,7 @@
           @endphp
            @if (Auth::user()->hasPermissionTo('add books')) 
                    <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addBookModal">
-                    Add Book
+                    Agregar libro
                   </button>
 
                   <button style="margin-right: 5px;" class="btn btn-warning float-right" data-toggle="modal" data-target="#showAllBooksModal">
@@ -74,11 +74,11 @@
                                         @if(Auth::user()->hasPermissionTo('update books'))
                                         <li style="margin-bottom: 5px;"> 
                                           <button   onclick="editBook({{  $book->id }}, '{{  $book->title }}', '{{  $book->description }}', {{  $book->year }}, {{  $book->pages }}, '{{  $book->isbn }}', '{{  $book->editorial }}', {{  $book->edition }}, '{{  $book->autor }}', {{  $book->Category_id }}, this)" class="btn btn-warning" data-toggle="modal" data-target="#editBookModal">
-                                              <span>Edit book</span>
+                                              <span>Editar</span>
                                             </button>
                                           </li>
                                           <button style="margin-bottom: 5px;" onclick="removeBook({{  $book->id }}, this)" class="btn btn-danger">
-                                                <span>Remove</span>
+                                                <span>Eliminar</span>
                                             </button>
                                         <li>
                                           <a href="{{url('/books/'.$book->id)}}" >
@@ -326,7 +326,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add new Book</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Agregar libro nuevo</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -335,47 +335,47 @@
                   @csrf
                   <div class="modal-body">
                       <div class="form-group">
-                          <label for="exampleInputEmail1">Title</label>
+                          <label for="exampleInputEmail1">Título</label>
                           <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
-                              <input type="text" name="title" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
+                              <input required type="text" name="title" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
+                            </div>                          
+                          <small id="emailHelp" class="form-text text-muted">Título del libro.</small>
+                        </div>
+
+                        <div class="form-group">
+                          <label for="exampleInputEmail1">Descripción</label>
+                          <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">@</span>
+                              </div>
+                              <textarea required class="form-control" id="input_description" name="description" aria-label="With textarea"></textarea>
                             </div>                          
                           <small id="emailHelp" class="form-text text-muted">Book title.</small>
                         </div>
 
                         <div class="form-group">
-                          <label for="exampleInputEmail1">Description</label>
+                          <label for="exampleInputEmail1">Año</label>
                           <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
-                              <textarea class="form-control" id="input_description" name="description" aria-label="With textarea"></textarea>
+                              <input required type="number" id="input_year" name="year" class="form-control" placeholder="year" aria-label="year" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book title.</small>
-                        </div>
-
-                        <div class="form-group">
-                          <label for="exampleInputEmail1">Year</label>
-                          <div class="input-group mb-3">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">@</span>
-                              </div>
-                              <input type="number" id="input_year" name="year" class="form-control" placeholder="year" aria-label="year" aria-describedby="basic-addon1">
-                            </div>                          
-                          <small id="bookYear" class="form-text text-muted">Book year.</small>
+                          <small id="bookYear" class="form-text text-muted">Año del libro</small>
                         </div>
                         
                         <div class="form-group">
-                          <label for="exampleInputEmail1">Pages</label>
+                          <label for="exampleInputEmail1">Páginas</label>
                           <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
-                              <input type="number" id="input_pages" name="pages" class="form-control" placeholder="Pages" aria-label="Pages" aria-describedby="basic-addon1">
+                              <input required type="number" id="input_pages" name="pages" class="form-control" placeholder="Pages" aria-label="Pages" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book pages.</small>
+                          <small id="emailHelp" class="form-text text-muted">Páginas del libro</small>
                         </div>
 
                         <div class="form-group">
@@ -384,9 +384,9 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
-                              <input type="text" name="isbn" id="input_isbn" class="form-control" placeholder="ISBN" aria-label="ISBN" aria-describedby="basic-addon1">
+                              <input required type="text" name="isbn" id="input_isbn" class="form-control" placeholder="ISBN" aria-label="ISBN" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book ISBN.</small>
+                          <small id="emailHelp" class="form-text text-muted">Libro ISBN.</small>
                         </div>
 
                         <div class="form-group">
@@ -395,20 +395,20 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
-                              <input type="text" id="input_editorial" name="editorial" class="form-control" placeholder="Editorial" aria-label="Editorial" aria-describedby="basic-addon1">
+                              <input required type="text" id="input_editorial" name="editorial" class="form-control" placeholder="Editorial" aria-label="Editorial" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book Editorial.</small>
+                          <small id="emailHelp" class="form-text text-muted">Libro Editorial.</small>
                         </div>
 
                         <div class="form-group">
-                          <label for="exampleInputEmail1">Edition</label>
+                          <label for="exampleInputEmail1">Edición</label>
                           <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
-                              <input type="number" id="input_edition" name="edition" class="form-control" placeholder="Edition" aria-label="Edition" aria-describedby="basic-addon1">
+                              <input required type="number" id="input_edition" name="edition" class="form-control" placeholder="Edition" aria-label="Edition" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book Edition.</small>
+                          <small id="emailHelp" class="form-text text-muted">Edición del libro.</small>
                         </div>
 
                         <div class="form-group">
@@ -417,9 +417,9 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
-                              <input type="text" id="input_autor" name="autor" class="form-control" placeholder="Autor" aria-label="Autor" aria-describedby="basic-addon1">
+                              <input required type="text" id="input_autor" name="autor" class="form-control" placeholder="Autor" aria-label="Autor" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book Autor.</small>
+                          <small id="emailHelp" class="form-text text-muted">Autor del libro.</small>
                         </div>
 
                         <div class="form-group">
@@ -428,13 +428,13 @@
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
-                              <input type="file" id="input_cover" id="input_cover" name="cover" class="form-control" name="cover">
+                              <input required type="file" id="input_cover" id="input_cover" name="cover" class="form-control" name="cover">
                             </div>                          
                           <small id="emailHelp" class="form-text text-muted">Book Cover Image.</small>
                         </div>
 
                         <div class="form-group">
-                          <label for="exampleInputEmail1">Category</label>
+                          <label for="exampleInputEmail1">Categoría</label>
                           <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
@@ -452,8 +452,8 @@
                         </div>
                   </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-primary">Save</button>
+                      <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
           
@@ -465,7 +465,7 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit book</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Editar libro</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -476,25 +476,25 @@
                   @method('PUT')
                   <div class="modal-body">
                       <div class="form-group">
-                          <label for="exampleInputEmail1">Title</label>
+                          <label for="exampleInputEmail1">Título</label>
                           <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
                               <input type="text" id="title" name="title" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book title.</small>
+                          <small id="emailHelp" class="form-text text-muted">título del libro</small>
                         </div>
 
                         <div class="form-group">
-                          <label for="exampleInputEmail1">Description</label>
+                          <label for="exampleInputEmail1">Descripción</label>
                           <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
                               <textarea class="form-control" id="description" name="description" aria-label="With textarea"></textarea>
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book title.</small>
+                          <small id="emailHelp" class="form-text text-muted">Título del libro</small>
                         </div>
 
                         <div class="form-group">
@@ -505,7 +505,7 @@
                               </div>
                               <input type="number" id="year" name="year" class="form-control" placeholder="year" aria-label="year" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="bookYear" class="form-text text-muted">Book year.</small>
+                          <small id="bookYear" class="form-text text-muted">Año del libro</small>
                         </div>
                         
                         <div class="form-group">
@@ -516,7 +516,7 @@
                               </div>
                               <input type="number" id="pages" name="pages" class="form-control" placeholder="Pages" aria-label="Pages" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book pages.</small>
+                          <small id="emailHelp" class="form-text text-muted">Páginas del libro</small>
                         </div>
 
                         <div class="form-group">
@@ -527,7 +527,7 @@
                               </div>
                               <input type="text" name="isbn" id="isbn" class="form-control" placeholder="ISBN" aria-label="ISBN" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book ISBN.</small>
+                          <small id="emailHelp" class="form-text text-muted">Libro ISBN.</small>
                         </div>
 
                         <div class="form-group">
@@ -538,18 +538,18 @@
                               </div>
                               <input type="text" id="editorial" name="editorial" class="form-control" placeholder="Editorial" aria-label="Editorial" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book Editorial.</small>
+                          <small id="emailHelp" class="form-text text-muted">Editorial del libro.</small>
                         </div>
 
                         <div class="form-group">
-                          <label for="exampleInputEmail1">Edition</label>
+                          <label for="exampleInputEmail1">Edición</label>
                           <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
                               </div>
                               <input type="number" id="edition" name="edition" class="form-control" placeholder="Edition" aria-label="Edition" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book Edition.</small>
+                          <small id="emailHelp" class="form-text text-muted">Edición del libro.</small>
                         </div>
 
                         <div class="form-group">
@@ -560,7 +560,7 @@
                               </div>
                               <input type="text" id="autor" name="autor" class="form-control" placeholder="Autor" aria-label="Autor" aria-describedby="basic-addon1">
                             </div>                          
-                          <small id="emailHelp" class="form-text text-muted">Book Autor.</small>
+                          <small id="emailHelp" class="form-text text-muted">Autor del libro</small>
                         </div>
 
                         <div class="form-group">
@@ -575,7 +575,7 @@
                         </div>
 
                         <div class="form-group">
-                          <label for="exampleInputEmail1">Category</label>
+                          <label for="exampleInputEmail1">Categoría</label>
                           <div class="input-group mb-3">
                               <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">@</span>
@@ -593,8 +593,8 @@
                         </div>
                   </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
-                      <button type="submit" class="btn btn-primary">Save</button>
+                      <button type="button" class="btn btn-warning" data-dismiss="modal">Cancelar</button>
+                      <button type="submit" class="btn btn-primary">Guardar</button>
                       <input type="hidden" name="id" id="id">
                     </div>
                 </form>
@@ -657,7 +657,7 @@
 
         function requestBook(book_id, user_id, loan_date, target) {
                 swal({
-                    title: "Are you sure?",
+                    title: "¿Está seguro de que quiere pedir el libro?",
                     icon: "warning",
                     buttons: true,
                     dangerMode: false,
